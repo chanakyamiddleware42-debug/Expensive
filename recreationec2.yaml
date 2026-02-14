@@ -9,6 +9,7 @@
     instances:
     - mangoDB    
     - cart
+    - frontend
     domain_name: chanidevops.online
    
 
