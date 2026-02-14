@@ -46,6 +46,20 @@
     loop: "{{ output.results }}"
     when: action == "create"
 
+  - name: route 53    
+    amazon.aws.route53:
+      state: present
+      zone: "{{ domain_name }}"
+      record: "roboshop-{{ env }}.{{ domain_name }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0]. public_ip_address }}"
+      wait: false
+      overwrite: true
+    loop: "{{ output.results }}"
+    when: item.item == "frontend"
+
+    
 
 
     #   - name: create r53 records
